@@ -18,6 +18,7 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login_actio
 Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
+    return redirect('home');
     return view('welcome');
 });
 
