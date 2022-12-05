@@ -12,6 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('assets/logo-mataram.png') }}" />
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -32,15 +33,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
                     @auth
+                        @if(Auth::user()->role != 'root')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('tindak_lanjut') }}">Tindak lanjut</a>
+                            <a class="nav-link {{ request()->is('home*') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                        </li>
+                        @endif
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('tindak-lanjut*') ? 'active' : '' }}" href="{{ route('tindak_lanjut') }}">Tindak lanjut</a>
                         </li>
                         @if(Auth::user()->role == 'root')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('pengajuan_tl') }}">Pengajuan TL</a>
+                                <a class="nav-link {{ request()->is('pengajuan_tl*') ? 'active' : '' }}" href="{{ route('pengajuan_tl') }}">Pengajuan TL</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('setting-pegawai.index') }}">Pegawai</a>
+                                <a class="nav-link {{ request()->is('setting-pegawai*') ? 'active' : '' }}" href="{{ route('setting-pegawai.index') }}">Pegawai</a>
                             </li>
                         @endif
                     @endauth
