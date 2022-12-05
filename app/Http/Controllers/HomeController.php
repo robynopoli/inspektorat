@@ -23,9 +23,25 @@ class HomeController extends Controller
             return redirect()->route('pengajuan_tl');
         }
 
-        $response = Http::withoutVerifying()->get($this->api_simhapnas.'integrasitltpb');
+//        return $user->pegawai->obriks;
+        $data = [];
+        foreach ($user->pegawai->obriks as $obrik){
+            $response = Http::withoutVerifying()->get($this->api_simhapnas.'integrasitltpb?Kode_Bidang_Obrik='.$obrik->kode_bidang_obrik);
+            if ($response->status() == 200){
+                foreach ($response->collect() as $item){
+
+                $data[] = $item;
+                }
+//                array_push($data, );
+            }
+        }
+
+//        return $data;
+
+//        $response = Http::withoutVerifying()->get($this->api_simhapnas.'integrasitltpb?Kode_Bidang_Obrik=527102004');
         return view('home')
-            ->with('data', $response->collect());
+            ->with('data', $data);
+//            ->with('data', $response->collect());
     }
 
     public function tindak_lanjut()

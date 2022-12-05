@@ -39,6 +39,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('pengajuan_tl') }}">Pengajuan TL</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('setting-pegawai.index') }}">Pegawai</a>
+                            </li>
                         @endif
                     @endauth
                 </ul>

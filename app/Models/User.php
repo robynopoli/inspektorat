@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Finding::class);
     }
+
+    public function pegawai(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Pegawai::class, 'nip', 'username');
+    }
 }

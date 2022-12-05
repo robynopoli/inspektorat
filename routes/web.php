@@ -19,7 +19,7 @@ Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])-
 
 Route::get('/', function () {
     return redirect('home');
-    return view('welcome');
+//    return view('welcome');
 });
 
 //Auth::routes();
@@ -31,3 +31,8 @@ Route::post('/tindak-lanjut-create', [App\Http\Controllers\HomeController::class
 Route::get('/pengajuan_tl', [App\Http\Controllers\HomeController::class, 'pengajuan_tl'])->name('pengajuan_tl');
 Route::get('/pengajuan_tl/{id}', [App\Http\Controllers\HomeController::class, 'pengajuan_tl_edit'])->name('pengajuan_tl_edit');
 Route::post('/pengajuan_tl/{id}', [App\Http\Controllers\HomeController::class, 'pengajuan_tl_update'])->name('pengajuan_tl_update');
+
+Route::get('/setting-pegawai', [App\Http\Controllers\SettingPegawaiController::class, 'index'])->name('setting-pegawai.index');
+Route::get('/setting-pegawai/create', [App\Http\Controllers\SettingPegawaiController::class, 'create'])->name('setting-pegawai.create');
+Route::post('/setting-pegawai', [App\Http\Controllers\SettingPegawaiController::class, 'store'])->name('setting-pegawai.store');
+Route::get('/setting-pegawai/destroy', [App\Http\Controllers\SettingPegawaiController::class, 'destroy'])->name('setting-pegawai.destroy');

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Obrik extends Model
+class PegawaiWithObrik extends Model
 {
     use HasFactory;
 
