@@ -29,7 +29,7 @@ class AuthController extends Controller
             }
         }
 
-        $response = Http::post('http://pegawai.bkpsdm.mataramkota.go.id/api/login', [
+        $response = Http::post(env('APP_SIMUTIARA').'/api/login', [
             'username' => $request->email,
             'password' => $request->password,
         ]);
@@ -41,7 +41,7 @@ class AuthController extends Controller
         }
         $apiToken = $response['token'];
 
-        $responseUser = Http::get('http://pegawai.bkpsdm.mataramkota.go.id/api/user?api_token='.$apiToken);
+        $responseUser = Http::get(env('APP_SIMUTIARA').'/api/user?api_token='.$apiToken);
 
         $user = User::firstOrCreate(
             [
