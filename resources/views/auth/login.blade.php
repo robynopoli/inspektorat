@@ -1,11 +1,18 @@
 @extends('layouts.app')
 
+@section('css')
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                <div class="card mt-5 rounded-0">
+                <div class="card mt-5 rounded-0 animate__animated animate__fadeInDown">
                     <div class="card-header"></div>
                     <div class="card-body pb-5">
 
