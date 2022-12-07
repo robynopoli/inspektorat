@@ -22,7 +22,7 @@ class HomeController extends Controller
         }
 
         $data = [];
-        if ($user->pegawai->obriks != null){
+        if ($user->pegawai){
             foreach ($user->pegawai->obriks as $obrik){
                 $response = Http::withoutVerifying()->get(env('APP_SIMHPNAS').'/backend/api/integrasitltpb?Kode_Bidang_Obrik='.$obrik->kode_bidang_obrik);
                 if ($response->status() == 200){
