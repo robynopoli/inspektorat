@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Finding;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -54,16 +55,29 @@ class HomeController extends Controller
     {
         $kode_rekomendasi = $request->kode_rekomendasi;
 
+        $q = $request->get('q');
+        if ($q) {
+            $data_pegawai = Http::withoutVerifying()->get(env('APP_SIMUTIARA').'/api/searching-pegawai?q=' . $q);
+            $data_pegawai = $data_pegawai->collect();
+        }else{
+            $data_pegawai = [];
+        }
+
         $response = Http::withoutVerifying()->get(env('APP_SIMHPNAS').'/backend/api/integrasitltpb/create?kode_rekomendasi='.$kode_rekomendasi);
         return view('form_tindak_lanjut.create')
+            ->with('data_pegawai', $data_pegawai)
             ->with('data', $response->collect());
     }
 
     public function tindak_lanjut_store(Request $request)
     {
+        $responseUser = Http::withoutVerifying()->get(env('APP_SIMUTIARA').'/api/searching-by-nip?nip=' . $request->nip);
+
         $request['user_id'] = Auth::id();
         $request['status'] = 'proses';
-        Finding::create($request->except('_token'));
+        $request['nama'] = $responseUser['nama'];
+        $request['jabatan'] = $responseUser['jabatan'];
+        Finding::create($request->except(['_token', 'q']));
 
         return redirect()->route('tindak_lanjut');
     }
