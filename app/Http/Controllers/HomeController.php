@@ -14,8 +14,6 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public string $api_simhapnas = 'https://simhpnas.inspektorat.mataramkota.go.id/backend/api/';
-
     public function index()
     {
         $user = Auth::user();
@@ -26,7 +24,7 @@ class HomeController extends Controller
 //        return $user->pegawai->obriks;
         $data = [];
         foreach ($user->pegawai->obriks as $obrik){
-            $response = Http::withoutVerifying()->get($this->api_simhapnas.'integrasitltpb?Kode_Bidang_Obrik='.$obrik->kode_bidang_obrik);
+            $response = Http::withoutVerifying()->get(env('APP_SIMHPNAS').'/backend/api/integrasitltpb?Kode_Bidang_Obrik='.$obrik->kode_bidang_obrik);
             if ($response->status() == 200){
                 foreach ($response->collect() as $item){
 
@@ -62,7 +60,7 @@ class HomeController extends Controller
     {
         $kode_rekomendasi = $request->kode_rekomendasi;
 
-        $response = Http::withoutVerifying()->get($this->api_simhapnas.'integrasitltpb/create?kode_rekomendasi='.$kode_rekomendasi);
+        $response = Http::withoutVerifying()->get(env('APP_SIMHPNAS').'/backend/api/integrasitltpb/create?kode_rekomendasi='.$kode_rekomendasi);
         return view('form_tindak_lanjut.create')
             ->with('data', $response->collect());
     }

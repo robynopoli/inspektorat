@@ -22,20 +22,16 @@ class SettingPegawaiController extends Controller
             ->with('data', $data);
     }
 
-    public string $api_simutiara = 'http://pegawai.bkpsdm.mataramkota.go.id/api/';
-//    public string $api_simutiara = 'http://si-mutiara.test/api/';
-    public string $api_simhapnas = 'https://simhpnas.inspektorat.mataramkota.go.id/backend/api/';
-
     public function create(Request $request)
     {
         $q = $request->get('q');
         if ($q) {
-            $data_pegawai = Http::withoutVerifying()->get($this->api_simutiara . 'searching-pegawai?q=' . $q);
+            $data_pegawai = Http::withoutVerifying()->get(env('APP_SIMUTIARA').'/api/searching-pegawai?q=' . $q);
             $data_pegawai = $data_pegawai->collect();
         }else{
             $data_pegawai = [];
         }
-        $data_obrik = Http::withoutVerifying()->get($this->api_simhapnas.'getbidangobrik');
+        $data_obrik = Http::withoutVerifying()->get(env('APP_SIMHPNAS').'/backend/api/getbidangobrik');
 
         return view('setting-pegawai.create')
             ->with('data_pegawai', $data_pegawai)
@@ -47,7 +43,7 @@ class SettingPegawaiController extends Controller
         $pegawai = Pegawai::where('nip', $request->nip)->first();
 
         if (!$pegawai){
-            $responseUser = Http::withoutVerifying()->get($this->api_simutiara . 'searching-by-nip?nip=' . $request->nip);
+            $responseUser = Http::withoutVerifying()->get(env('APP_SIMUTIARA').'/api/searching-by-nip?nip=' . $request->nip);
             $pegawai = Pegawai::create(
                 [
                     'nip' => $request->nip,
