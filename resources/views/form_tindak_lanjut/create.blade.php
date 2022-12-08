@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <h6 class="fw-bold">Penanggung Jawab</h6>
+                                    <h6 class="fw-bold">Penanggungjawab Temuan</h6>
                                     <div class="mb-3">
                                         <label class="form-label">Cari pegawai</label>
                                         <div class="input-group">
