@@ -46,6 +46,12 @@ class ImtakPengawasanController extends Controller
         return redirect()->route('admin.imtak-pengawasan.index');
     }
 
+    public function approve($id)
+    {
+        Event::where('id', $id)->update(['status' => Event::CHOICE_STATUS[1]]);
+        return redirect()->route('admin.imtak-pengawasan.index');
+    }
+
     public function destroy($id)
     {
         Event::where('id', $id)->delete();

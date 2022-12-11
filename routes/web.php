@@ -43,6 +43,8 @@ Route::middleware(['auth'])->group(function (){
                 ->name('admin.imtak-pengawasan.request');
             Route::get('{id}/edit', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'edit'])
                 ->name('admin.imtak-pengawasan.edit');
+            Route::get('{id}/approve', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'approve'])
+                ->name('admin.imtak-pengawasan.approve');
             Route::put('{id}', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'update'])
                 ->name('admin.imtak-pengawasan.update');
             Route::delete('{id}', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'destroy'])

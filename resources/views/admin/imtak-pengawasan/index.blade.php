@@ -49,9 +49,12 @@
                                         </td>
                                         <td class="text-capitalize">
                                             @if($i->status == 'diajukan')
-                                                <div class="text-warning">
+                                                <a href="{{ route('admin.imtak-pengawasan.approve', ['id' => $i->id]) }}"
+                                                   class="btn btn-outline-primary btn-sm"
+                                                   data-bs-toggle="tooltip" data-bs-placement="top" title="Klik untuk setujui"
+                                                   onclick="return confirm('Anda yakin akan menyetujui ini ?')">
                                                     {{ $i->status }}
-                                                </div>
+                                                </a>
                                             @endif
                                             @if($i->status == 'disetujui')
                                                 <div class="text-success">
@@ -104,7 +107,13 @@
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#table').DataTable();
+            $('#table').DataTable({
+                "fnDrawCallback": function () {
+                    $('#table tbody tr').each(function () {
+                        $('[data-bs-toggle="tooltip"]').tooltip()
+                    });
+                }
+            });
         });
     </script>
 @endsection
