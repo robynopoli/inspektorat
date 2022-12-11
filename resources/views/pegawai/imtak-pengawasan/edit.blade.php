@@ -53,6 +53,7 @@
                                         <input type="text" name="number_phone" id="number_phone"
                                                class="form-control shadow-none @error('number_phone') is-invalid @enderror"
                                                value="{{ $data->number_phone }}">
+                                        <small class="text-muted">Contoh: 62819519872372</small>
                                         @error('number_phone')
                                         <div class="invalid-feedback">
                                             {{ $message }}

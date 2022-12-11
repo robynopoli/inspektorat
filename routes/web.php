@@ -37,7 +37,16 @@ Route::middleware(['auth'])->group(function (){
          * IMTAK PENGAWASAN
          */
         Route::prefix('imtak-pengawasan')->group(function (){
-
+            Route::get('/', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'index'])
+                ->name('admin.imtak-pengawasan.index');
+            Route::get('/request', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'request'])
+                ->name('admin.imtak-pengawasan.request');
+            Route::get('{id}/edit', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'edit'])
+                ->name('admin.imtak-pengawasan.edit');
+            Route::put('{id}', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'update'])
+                ->name('admin.imtak-pengawasan.update');
+            Route::delete('{id}', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'destroy'])
+                ->name('admin.imtak-pengawasan.destroy');
         });
 
         /*

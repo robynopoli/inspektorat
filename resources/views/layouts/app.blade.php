@@ -59,6 +59,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 @auth
                     @if(Auth::user()->role == 'root')
+                        @php
+                            $count_request_coaching = \App\Models\Event::where('status', \App\Models\Event::CHOICE_STATUS[0])->count();
+                        @endphp
                     <!-- SIDEBAR UNTUK USER ADMIN ROOT -->
                         <ul class="navbar-nav mx-auto">
                             <li class="nav-item dropdown">
@@ -78,25 +81,27 @@
                                     </a>
                                 </div>
                             </li>
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="text-capitalize nav-link nav-link-custom {{ request()->is('setting-pegawai*') ? 'active' : '' }}"--}}
-{{--                                   href="{{ route('setting-pegawai.index') }}">--}}
-{{--                                    Pegawai--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-capitalize {{ request()->is('admin/imtak-pengawasan*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    imtak pengawasan
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="">
+                                    <a class="dropdown-item text-capitalize {{ request()->is('admin/imtak-pengawasan') ? 'active' : '' }}"  href="{{ route('admin.imtak-pengawasan.index') }}">
+                                        seluruh pengajuan
+                                    </a>
+                                    <a class="dropdown-item text-capitalize {{ request()->is('admin/imtak-pengawasan/request') ? 'active' : '' }}"  href="{{ route('admin.imtak-pengawasan.request') }}">
+                                        belum diproses
+                                        <span class="badge bg-danger">{{ $count_request_coaching }}</span>
+                                    </a>
+                                </div>
+                            </li>
                         </ul>
                     @endif
 
                     @if(Auth::user()->role != 'root')
                         <!-- SIDEBAR UNTUK USER PEGAWAI -->
                         <ul class="navbar-nav mx-auto">
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="text-capitalize nav-link nav-link-custom {{ request()->is('tindak-lanjut*') ? 'active' : '' }}"--}}
-{{--                                   href="{{ route('tindak_lanjut') }}">--}}
-{{--                                    pemantauan tindak lanjut--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-capitalize {{ request()->is('pegawai/pemantauan-tindak-lanjut*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     pemantauan tindak lanjut
