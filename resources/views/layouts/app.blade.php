@@ -113,8 +113,8 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="text-capitalize nav-link nav-link-custom {{ request()->is('tindak-lanjut*') ? 'active' : '' }}"
-                                   href="{{ route('tindak_lanjut') }}">
+                                <a class="text-capitalize nav-link nav-link-custom {{ request()->is('pegawai/imtak-pengawasan*') ? 'active' : '' }}"
+                                   href="{{ route('pegawai.imtak-pengawasan.index') }}">
                                     Imtaq pengawasan
                                 </a>
                             </li>

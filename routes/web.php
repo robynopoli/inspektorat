@@ -76,9 +76,8 @@ Route::middleware(['auth'])->group(function (){
         /*
         * IMTAK PENGAWASAN
         */
-        Route::prefix('imtak-pengawasan')->group(function (){
-
-        });
+        Route::resource('imtak-pengawasan', \App\Http\Controllers\Pegawai\ImtakPengawasanController::class,
+            ['except' => ['show'], 'as'=>'pegawai']);
 
         /*
          * PEMANTAUAN TINDAK LANJUT
