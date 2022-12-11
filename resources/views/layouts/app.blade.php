@@ -23,6 +23,10 @@
             color: #1a56db;
             font-weight: 500;
         }
+        body{
+            /*background-color: #1a56db;*/
+            background-color: #f1f5f9;
+        }
         .nav-link-custom.active{
             color: #1a56db;
             font-weight: 700;
@@ -30,13 +34,21 @@
         .card{
             border-radius: 0.3em;
         }
+        .text-gradient{
+            background: -webkit-linear-gradient(#32b8e7, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dropdown-menu{
+            border-top: 2px solid #1a56db;
+        }
     </style>
 </head>
-<body>
+<body >
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white" style="box-shadow: 0 .125rem .5rem rgba(0,0,0,.2)!important;">
         <div class="container">
-            <a class="navbar-brand text-center text-secondary" href="{{ route('home') }}">
+            <a class="navbar-brand text-center text-secondary" href="{{ url('/') }}">
                 Inspektorat <br>
                 Kota Mataram
             </a>
@@ -45,26 +57,70 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto">
-                    @auth
-                        @if(Auth::user()->role != 'root')
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-custom {{ request()->is('home*') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                @auth
+                    @if(Auth::user()->role == 'root')
+                    <!-- SIDEBAR UNTUK USER ADMIN ROOT -->
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-capitalize {{ request()->is('admin/pemantauan-tindak-lanjut*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    pemantauan tindak lanjut
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="">
+                                    <a class="dropdown-item text-capitalize {{ request()->is('admin/pemantauan-tindak-lanjut') ? 'active' : '' }}"  href="{{ route('admin.pemantauan-tindak-lanjut.index') }}">
+                                        daftar pengajuan
+                                    </a>
+                                    <a class="dropdown-item text-capitalize {{ request()->is('admin/pemantauan-tindak-lanjut/pengajuan_tl*') ? 'active' : '' }}"  href="{{ route('pengajuan_tl') }}">
+                                        belum diproses
+                                    </a>
+                                    <a class="dropdown-item text-capitalize {{ request()->is('admin/pemantauan-tindak-lanjut/setting-pegawai*') ? 'active' : '' }}" href="{{ route('setting-pegawai.index') }}">
+                                        setting pegawai
+                                    </a>
+                                </div>
                             </li>
-                        @endif
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-custom {{ request()->is('tindak-lanjut*') ? 'active' : '' }}" href="{{ route('tindak_lanjut') }}">Tindak lanjut</a>
-                        </li>
-                        @if(Auth::user()->role == 'root')
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-custom {{ request()->is('pengajuan_tl*') ? 'active' : '' }}" href="{{ route('pengajuan_tl') }}">Pengajuan TL</a>
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="text-capitalize nav-link nav-link-custom {{ request()->is('setting-pegawai*') ? 'active' : '' }}"--}}
+{{--                                   href="{{ route('setting-pegawai.index') }}">--}}
+{{--                                    Pegawai--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+                        </ul>
+                    @endif
+
+                    @if(Auth::user()->role != 'root')
+                        <!-- SIDEBAR UNTUK USER PEGAWAI -->
+                        <ul class="navbar-nav mx-auto">
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="text-capitalize nav-link nav-link-custom {{ request()->is('tindak-lanjut*') ? 'active' : '' }}"--}}
+{{--                                   href="{{ route('tindak_lanjut') }}">--}}
+{{--                                    pemantauan tindak lanjut--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-capitalize {{ request()->is('pegawai/pemantauan-tindak-lanjut*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    pemantauan tindak lanjut
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="">
+                                    <a class="dropdown-item text-capitalize {{ request()->is('pegawai/pemantauan-tindak-lanjut') ? 'active' : '' }}"  href="{{ route('pemantauan-tindak-lanjut.index') }}">
+                                        daftar pemantauan
+                                    </a>
+                                    <a class="dropdown-item text-capitalize {{ request()->is('pegawai/pemantauan-tindak-lanjut/tindak-lanjut*') ? 'active' : '' }}" href="{{ route('tindak_lanjut') }}">
+                                        tindak lanjut
+                                    </a>
+                                </div>
                             </li>
+
                             <li class="nav-item">
-                                <a class="nav-link nav-link-custom {{ request()->is('setting-pegawai*') ? 'active' : '' }}" href="{{ route('setting-pegawai.index') }}">Pegawai</a>
+                                <a class="text-capitalize nav-link nav-link-custom {{ request()->is('tindak-lanjut*') ? 'active' : '' }}"
+                                   href="{{ route('tindak_lanjut') }}">
+                                    Imtaq pengawasan
+                                </a>
                             </li>
-                        @endif
-                    @endauth
-                </ul>
+                        </ul>
+                    @endif
+                @endauth
 
                 <ul class="navbar-nav ms-auto">
                     @guest
@@ -107,7 +163,7 @@
         @yield('content')
     </main>
 
-    <footer class="p-4" style="background-color: #e5e7eb; margin-top: 5em">
+    <footer class="p-4" style="background-color: #e2e8f0; margin-top: 5em">
         <div class="row mb-5 mt-4">
             <div class="col-md-4">
                 <a href="http://inspektorat.mataramkota.go.id/" class="d-flex align-items-center text-decoration-none">

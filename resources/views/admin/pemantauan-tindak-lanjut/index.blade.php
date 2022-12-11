@@ -5,8 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card animate__animated animate__fadeInUp">
-                    <div class="card-header">Tindak Lanjut</div>
-
+                    <div class="card-header">Pengajuan Tindak Lanjut</div>
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
@@ -16,60 +15,42 @@
                         <div class="table-responsive">
                             <table class="table table-bordered" id="table">
                                 <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Kode</th>
-                                    <th>NIP / Pegawai</th>
-                                    <th>Tindak Lanjut</th>
-                                    <th class="text-center">Status</th>
-                                    <th>Keterangan</th>
+                                <tr class="text-center">
+                                    <th>KODE</th>
+                                    <th>TINDAK LANJUT</th>
+                                    <th>NIP / PEGAWAI</th>
+                                    <th>STATUS</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($data as $i)
                                     <tr>
-                                        <td class="text-center">
-                                            <a href="{{ route('tindak_lanjut_create', ['kode_rekomendasi' => $i['kode_rekomendasi']]) }}" class="btn btn-sm btn-primary me-2">
-                                                Edit
-                                            </a>
-                                            <a href="{{ route('tindak_lanjut_create', ['kode_rekomendasi' => $i['kode_rekomendasi']]) }}" class="btn btn-sm btn-danger">
-                                                Hapus
-                                            </a>
-                                        </td>
                                         <td>
                                             Kode rekomendasi : {{ $i->kode_rekomendasi }} <br>
                                             Kode temuan : {{ $i->kode_temuan }} <br>
                                             Kode LHA : {{ $i->kode_lha }} <br>
                                         </td>
                                         <td>
+                                            <a href="{{ $i->tindak_lanjut }}" target="_blank">
+                                                {{ $i->tindak_lanjut }}
+                                            </a>
+                                        </td>
+                                        <td>
                                             NIP : {{ $i->nip }} <br>
                                             Nama : {{ $i->nama }} <br>
                                             Jabatan : {{ $i->jabatan }}
                                         </td>
-                                        <td>{{ $i->tindak_lanjut }}</td>
                                         <td class="text-center">
-                                            @if($i->status == 'proses')
-                                                <div class="badge bg-warning text-capitalize">
+                                            @if($i->status == 'd' || $i->status == 'belum diproses')
+                                                <a href="{{ route('pengajuan_tl_edit', $i->id) }}" class="btn btn-outline-primary btn-sm text-capitalize">
                                                     {{ $i->status }}
-                                                </div>
-                                            @endif
-                                            @if($i->status == 'ms')
-                                                <div class="badge bg-success text-uppercase">
-                                                    {{ $i->status }}
-                                                </div>
-                                            @endif
-                                            @if($i->status == 's')
-                                                <div class="badge bg-success text-uppercase">
-                                                    {{ $i->status }}
-                                                </div>
-                                            @endif
-                                            @if($i->status == 'tms')
-                                                <div class="badge bg-danger text-uppercase">
+                                                </a>
+                                            @else
+                                                <div class="text-success text-capitalize">
                                                     {{ $i->status }}
                                                 </div>
                                             @endif
                                         </td>
-                                        <td>{{ $i->keterangan }}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

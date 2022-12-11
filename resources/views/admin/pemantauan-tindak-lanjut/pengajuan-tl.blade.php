@@ -30,7 +30,11 @@
                                             Kode temuan : {{ $i->kode_temuan }} <br>
                                             Kode LHA : {{ $i->kode_lha }} <br>
                                         </td>
-                                        <td>{{ $i->tindak_lanjut }}</td>
+                                        <td>
+                                            <a href="{{ $i->tindak_lanjut }}" target="_blank">
+                                                {{ $i->tindak_lanjut }}
+                                            </a>
+                                        </td>
                                         <td>
                                             NIP : {{ $i->nip }} <br>
                                             Nama : {{ $i->nama }} <br>

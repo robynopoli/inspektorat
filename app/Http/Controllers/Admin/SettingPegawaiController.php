@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Obrik;
 use App\Models\Pegawai;
 use App\Models\PegawaiWithObrik;
@@ -10,15 +11,10 @@ use Illuminate\Support\Facades\Http;
 
 class SettingPegawaiController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $data = Pegawai::all();
-        return view('setting-pegawai.index')
+        return view('admin.pemantauan-tindak-lanjut.setting-pegawai.index')
             ->with('data', $data);
     }
 
@@ -33,7 +29,7 @@ class SettingPegawaiController extends Controller
         }
         $data_obrik = Http::withoutVerifying()->get(env('APP_SIMHPNAS').'/backend/api/getbidangobrik');
 
-        return view('setting-pegawai.create')
+        return view('admin.pemantauan-tindak-lanjut.setting-pegawai.create')
             ->with('data_pegawai', $data_pegawai)
             ->with('data_obrik', $data_obrik->collect() ?? []);
     }

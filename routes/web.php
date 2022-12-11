@@ -13,26 +13,88 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Auth::routes();
+
 Route::get('/login', [\App\Http\Controllers\AuthController::class, 'index'])->name('login');
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login_action'])->name('login.login_action');
 Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
-    return redirect('home');
-//    return view('welcome');
+    if (Auth::guest()){
+        return view('home.pegawai');
+    }else{
+        return redirect()->route('home');
+    }
 });
 
-//Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/tindak-lanjut', [App\Http\Controllers\HomeController::class, 'tindak_lanjut'])->name('tindak_lanjut');
-Route::get('/tindak-lanjut-create', [App\Http\Controllers\HomeController::class, 'tindak_lanjut_create'])->name('tindak_lanjut_create');
-Route::post('/tindak-lanjut-create', [App\Http\Controllers\HomeController::class, 'tindak_lanjut_store'])->name('tindak_lanjut_store');
-Route::get('/pengajuan_tl', [App\Http\Controllers\HomeController::class, 'pengajuan_tl'])->name('pengajuan_tl');
-Route::get('/pengajuan_tl/{id}', [App\Http\Controllers\HomeController::class, 'pengajuan_tl_edit'])->name('pengajuan_tl_edit');
-Route::post('/pengajuan_tl/{id}', [App\Http\Controllers\HomeController::class, 'pengajuan_tl_update'])->name('pengajuan_tl_update');
 
-Route::get('/setting-pegawai', [App\Http\Controllers\SettingPegawaiController::class, 'index'])->name('setting-pegawai.index');
-Route::get('/setting-pegawai/create', [App\Http\Controllers\SettingPegawaiController::class, 'create'])->name('setting-pegawai.create');
-Route::post('/setting-pegawai', [App\Http\Controllers\SettingPegawaiController::class, 'store'])->name('setting-pegawai.store');
-Route::get('/setting-pegawai/destroy', [App\Http\Controllers\SettingPegawaiController::class, 'destroy'])->name('setting-pegawai.destroy');
+Route::middleware(['auth'])->group(function (){
+
+    Route::prefix('admin')->group(function () {
+
+        /*
+         * IMTAK PENGAWASAN
+         */
+        Route::prefix('imtak-pengawasan')->group(function (){
+
+        });
+
+        /*
+         * PEMANTAUAN TINDAK LANJUT
+         */
+        Route::prefix('pemantauan-tindak-lanjut')->group(function (){
+
+            Route::get('/', [App\Http\Controllers\Admin\PemantauanTindakLanjutController::class, 'index'])
+                ->name('admin.pemantauan-tindak-lanjut.index');
+
+            Route::get('/pengajuan_tl', [App\Http\Controllers\Admin\PemantauanTindakLanjutController::class, 'pengajuan_tindak_lanjut'])
+                ->name('pengajuan_tl');
+            Route::get('/pengajuan_tl/{id}', [App\Http\Controllers\Admin\PemantauanTindakLanjutController::class, 'pengajuan_tindak_lanjut_edit'])
+                ->name('pengajuan_tl_edit');
+            Route::post('/pengajuan_tl/{id}', [App\Http\Controllers\Admin\PemantauanTindakLanjutController::class, 'pengajuan_tindak_lanjut_update'])
+                ->name('pengajuan_tl_update');
+
+
+            /*
+            * SETTING PEGAWAI DENGAN OBRIK
+            */
+            Route::get('/setting-pegawai', [App\Http\Controllers\Admin\SettingPegawaiController::class, 'index'])
+                ->name('setting-pegawai.index');
+            Route::get('/setting-pegawai/create', [App\Http\Controllers\Admin\SettingPegawaiController::class, 'create'])
+                ->name('setting-pegawai.create');
+            Route::post('/setting-pegawai', [App\Http\Controllers\Admin\SettingPegawaiController::class, 'store'])
+                ->name('setting-pegawai.store');
+            Route::get('/setting-pegawai/destroy', [App\Http\Controllers\Admin\SettingPegawaiController::class, 'destroy'])
+                ->name('setting-pegawai.destroy');
+
+        });
+
+    });
+
+    Route::prefix('pegawai')->group(function () {
+        /*
+        * IMTAK PENGAWASAN
+        */
+        Route::prefix('imtak-pengawasan')->group(function (){
+
+        });
+
+        /*
+         * PEMANTAUAN TINDAK LANJUT
+         */
+        Route::prefix('pemantauan-tindak-lanjut')->group(function (){
+            Route::get('/', [App\Http\Controllers\Pegawai\PemantauanTindakLanjutController::class, 'index'])
+                ->name('pemantauan-tindak-lanjut.index');
+
+            Route::get('/tindak-lanjut', [App\Http\Controllers\Pegawai\PemantauanTindakLanjutController::class, 'tindak_lanjut'])
+                ->name('tindak_lanjut');
+            Route::get('/tindak-lanjut-create', [App\Http\Controllers\Pegawai\PemantauanTindakLanjutController::class, 'tindak_lanjut_create'])
+                ->name('tindak_lanjut_create');
+            Route::post('/tindak-lanjut-create', [App\Http\Controllers\Pegawai\PemantauanTindakLanjutController::class, 'tindak_lanjut_store'])
+                ->name('tindak_lanjut_store');
+        });
+    });
+
+});
+

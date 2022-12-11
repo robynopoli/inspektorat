@@ -16,12 +16,17 @@
 
                         <form action="{{ route('pengajuan_tl_update', $data->id) }}" method="POST">
                             @csrf
+                            <div class="mb-3">
+                                <label class="fw-bold">Tindak lanjut</label> <br>
+                                <a href="{{ $data->tindak_lanjut }}" target="_blank">{{ $data->tindak_lanjut }}</a>
+                            </div>
+                            <hr>
                             <div class="form-group mb-3">
                                 <label for="status">Status</label>
                                 <select name="status" id="status" class="form-control shadow-none" onchange="check_active()" required>
                                     <option value="">Pilih</option>
-                                    <option value="ms">Memenuhi Syarat</option>
-                                    <option value="tms">Tidak Memenuhi Syarat</option>
+                                    <option value="s">Selesai</option>
+                                    <option value="d">Dalam Proses</option>
                                 </select>
                             </div>
                             <div class="form-group mb-3">
@@ -52,7 +57,7 @@
             const keterangan = document.getElementById('keterangan');
             keterangan.disabled = true;
             keterangan.value = '';
-            if (status.value === 'tms'){
+            if (status.value === 'd'){
                 keterangan.disabled = false;
             }
         }
