@@ -49,7 +49,10 @@
                                         <label for="tindak_lanjut">Tindak Lanjut</label><br>
                                         <small class="text-muted">Anda dapat menambahkan link bukti tindak lanjut disini
                                             (seperti GDrive, atau lainnya)</small>
-                                        <textarea name="tindak_lanjut" id="tindak_lanjut" rows="5" class="form-control shadow-none"></textarea>
+                                        <textarea name="tindak_lanjut" id="tindak_lanjut" rows="5" class="form-control shadow-none @error('tindak_lanjut') is-invalid @enderror"></textarea>
+                                        @error('tindak_lanjut')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -75,7 +78,7 @@
                                                 <label class="form-check-label" for="{{ $pegawai['nip'] }}">
                                                     <b>{{ $pegawai['nip'] }}</b> -
                                                     {{ $pegawai['nama'] }} <br>
-                                                    <small>{{ $pegawai['jabatan'] }}</small>
+                                                    <small>{{ $pegawai['jabatan'] }} - {{ $pegawai['opd'] }}</small>
                                                 </label>
                                             </div>
                                         @endforeach

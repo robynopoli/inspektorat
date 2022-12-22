@@ -40,14 +40,13 @@
 
                                             @if($check)
                                                 <div class="text-warning text-capitalize">
-                                                    {{ $check->status }}
+                                                    {{ $check->status == 's' ? 'Selesai' : 'Dalam Proses'}}
                                                 </div>
                                             @else
                                                 <a href="{{ route('tindak_lanjut_create', ['kode_rekomendasi' => $i['kode_rekomendasi']]) }}" class="btn btn-primary">
                                                     Tindak lanjut
                                                 </a>
                                             @endif
-
                                         </td>
                                         <td>{{ $i['Memo_Rekomendasi'] }}</td>
                                         <td>{{ $i['Judul_Laporan'] }}</td>

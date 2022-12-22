@@ -30,17 +30,17 @@
                                         <td class="text-center">
                                             @if($i->status == 'd')
                                                 <div class="badge bg-warning text-capitalize">
-                                                    {{ $i->status }}
+                                                    Dalam Proses
                                                 </div>
                                             @endif
                                             @if($i->status == 's')
-                                                <div class="badge bg-success text-uppercase">
-                                                    {{ $i->status }}
+                                                <div class="badge bg-success text-capitalize">
+                                                    Selesai
                                                 </div>
                                             @endif
                                             @if($i->status == 'belum diproses')
                                                 <div class="badge bg-warning text-capitalize">
-                                                    {{ $i->status }}
+                                                    belum diproses
                                                 </div>
                                             @endif
                                             @if($i->status == 'belum diproses' || $i->status == 'd')
@@ -60,7 +60,9 @@
                                             Nama : {{ $i->nama }} <br>
                                             Jabatan : {{ $i->jabatan }}
                                         </td>
-                                        <td>{{ $i->tindak_lanjut }}</td>
+                                        <td style="width: 30%; word-wrap: anywhere">
+                                            <a href="{{ $i->tindak_lanjut }}"><small>{{ $i->tindak_lanjut }}</small></a>
+                                        </td>
                                         <td>{{ $i->keterangan }}</td>
                                     </tr>
                                 @endforeach

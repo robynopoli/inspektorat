@@ -28,7 +28,8 @@
                                         <input class="form-check-input" type="radio" name="nip" id="{{ $pegawai['nip'] }}" value="{{ $pegawai['nip'] }}">
                                         <label class="form-check-label" for="{{ $pegawai['nip'] }}">
                                             {{ $pegawai['nip'] }} -
-                                            {{ $pegawai['nama'] }}
+                                            {{ $pegawai['nama'] }} <br>
+                                            <small><i>{{ $pegawai['opd'] }}</i></small>
                                         </label>
                                     </div>
                                 @endforeach

@@ -58,6 +58,9 @@ class PemantauanTindakLanjutController extends Controller
 
     public function tindak_lanjut_store(Request $request)
     {
+        $request->validate(
+          ['tindak_lanjut' => 'url']
+        );
         if (!$request->nip)
         {
             Session::flash('status', 'Anda harus memilih Penanggung Jawab');
@@ -70,6 +73,7 @@ class PemantauanTindakLanjutController extends Controller
         $request['status'] = 'belum diproses';
         $request['nama'] = $responseUser['nama'];
         $request['jabatan'] = $responseUser['jabatan'];
+        $request['opd'] = $responseUser['opd'];
         Finding::create($request->except(['_token', 'q']));
 
         return redirect()->route('tindak_lanjut');

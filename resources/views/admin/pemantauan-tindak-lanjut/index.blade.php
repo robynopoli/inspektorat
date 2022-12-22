@@ -30,24 +30,27 @@
                                             Kode temuan : {{ $i->kode_temuan }} <br>
                                             Kode LHA : {{ $i->kode_lha }} <br>
                                         </td>
-                                        <td>
+                                        <td style="width: 30%; word-wrap: anywhere">
                                             <a href="{{ $i->tindak_lanjut }}" target="_blank">
                                                 {{ $i->tindak_lanjut }}
                                             </a>
                                         </td>
                                         <td>
-                                            NIP : {{ $i->nip }} <br>
-                                            Nama : {{ $i->nama }} <br>
-                                            Jabatan : {{ $i->jabatan }}
+                                            <small>
+                                                NIP : {{ $i->nip }} <br>
+                                                Nama : {{ $i->nama }} <br>
+                                                Jabatan : {{ $i->jabatan }} <br>
+                                                OPD : {{ $i->opd }}
+                                            </small>
                                         </td>
                                         <td class="text-center">
                                             @if($i->status == 'd' || $i->status == 'belum diproses')
                                                 <a href="{{ route('pengajuan_tl_edit', $i->id) }}" class="btn btn-outline-primary btn-sm text-capitalize">
-                                                    {{ $i->status }}
+                                                    Dalam Proses
                                                 </a>
                                             @else
                                                 <div class="text-success text-capitalize">
-                                                    {{ $i->status }}
+                                                    Selesai
                                                 </div>
                                             @endif
                                         </td>

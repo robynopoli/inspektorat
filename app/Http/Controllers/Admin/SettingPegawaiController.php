@@ -23,6 +23,7 @@ class SettingPegawaiController extends Controller
         $q = $request->get('q');
         if ($q) {
             $data_pegawai = Http::withoutVerifying()->get(env('APP_SIMUTIARA').'/api/searching-pegawai?q=' . $q);
+//            return $data_pegawai;
             $data_pegawai = $data_pegawai->collect();
         }else{
             $data_pegawai = [];
