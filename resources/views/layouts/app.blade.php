@@ -49,7 +49,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white" style="box-shadow: 0 .125rem .5rem rgba(0,0,0,.2)!important;">
         <div class="container">
             <a class="navbar-brand text-center text-secondary" href="{{ url('/') }}">
-                Inspektorat <br>
+                Pemerintah <br>
                 Kota Mataram
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -172,7 +172,7 @@
         <div class="row mb-5 mt-4">
             <div class="col-md-4">
                 <a href="http://inspektorat.mataramkota.go.id/" class="d-flex align-items-center text-decoration-none">
-                    <img src="{{ asset('assets/logo-mataram.png') }}" class="me-3" style="max-height: 6em" alt="Logo Mataram">
+                    <img src="{{ asset('assets/Inspektorat.png') }}" class="me-3" style="max-height: 6em" alt="Logo Mataram">
                     <div class="">
                         <span class="text-uppercase h4 fw-bold">Inspektorat</span><br>
                         <span class="text-dark fw-bold h4">Kota Mataram</span>
@@ -226,10 +226,10 @@
             </div>
             <div class="col-md-4">
                 <div class="text-gray-600 dark:text-gray-400">
-                    <h2 class="mb-4 text-sm h5">Survey Layanan</h2>
-                    <p>Survey kepuasan dalam pengawasan dan pembinaan APIP lingkup Kota Mataram</p>
-                    <a href="http://inspektorat.mataramkota.go.id/survey/publik" class="btn btn-primary px-5 text-center mr-2 mb-2">
-                        Isi Survey
+                    <h2 class="mb-4 text-sm h5">Survei Layanan</h2>
+                    <p>Survei kepuasan dalam pengawasan dan pembinaan APIP lingkup Kota Mataram</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf8TasrjVONUfXmp7uGxJlZ5EWsKVZE938TqiMIXnBSIAz8Lw/viewform" target="_blank" class="btn btn-primary px-5 text-center mr-2 mb-2">
+                        Isi Survei
                     </a>
                 </div>
             </div>

@@ -12,7 +12,7 @@ class Event extends Model
     protected $guarded = [];
 
     const CHOICE_STATUS = ['diajukan', 'disetujui', 'ditolak'];
-    const CHOICE_EVENT_PROBLEM = ['permasalahan hukum', 'permasalahan personal', 'permasalahan kepegawaian'];
+    const CHOICE_EVENT_PROBLEM = ['permasalahan Administrasi', 'Permasalahan Keuangan'];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
