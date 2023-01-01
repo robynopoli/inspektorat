@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-            UserSeeder::class,
+            // UserSeeder::class,
+            McpKpkSeeder::class,
         ]);
 
 //        DB::unprepared(file_get_contents('database/pegawai.sql'));
