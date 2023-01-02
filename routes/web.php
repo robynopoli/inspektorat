@@ -51,6 +51,12 @@ Route::middleware(['auth'])->group(function (){
                 ->name('admin.imtak-pengawasan.destroy');
         });
 
+        Route::prefix('mcp-kpk')->group(function (){
+            Route::get('/', [App\Http\Controllers\Admin\McpController::class, 'index'])
+                ->name('admin.mcp-kpk.index');
+            Route::resource('area-intervensi', App\Http\Controllers\Admin\McpKpk\AreaIntervensiController::class, ['as'=>'admin.mcp-kpk']);
+        });
+
         /*
          * PEMANTAUAN TINDAK LANJUT
          */
