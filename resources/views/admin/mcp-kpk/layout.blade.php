@@ -5,10 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-3">
                 <ul class="">
-                    <a href="#" class="list-group-item fw-bold text-primary mb-2" aria-current="true">
+                    <a href="{{ route('admin.mcp-kpk.area-intervensi.index') }}"
+                        class="list-group-item fw-bold text-primary mb-2" aria-current="true">
                         Area Intervensi
                     </a>
-                    <a href="#" class="list-group-item mb-2">
+                    <a href="{{ route('admin.mcp-kpk.indikator.index') }}" class="list-group-item mb-2">
                         Indikator
                     </a>
                 </ul>

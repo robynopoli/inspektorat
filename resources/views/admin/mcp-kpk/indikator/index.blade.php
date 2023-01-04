@@ -1,16 +1,17 @@
 @extends('admin.mcp-kpk.layout')
 
-@section('title', 'Area intervensi')
+@section('title', 'Indikator')
 
 @section('contents')
-    <a href="{{ route('admin.mcp-kpk.area-intervensi.create') }}" class="btn btn-primary btn-sm mb-3">Tambah</a>
+    <a href="{{ route('admin.mcp-kpk.indikator.create') }}" class="btn btn-primary btn-sm mb-3">Tambah</a>
     <div class="table-responsive">
-        <table class="table-bordered table" id="table">
+        <table class="table-bordered table-sm table" id="table">
             <thead>
                 <tr>
                     <th class="text-center">#</th>
-                    <th>Keterangan</th>
+                    <th>Area Intervensi</th>
                     <th>Indikator</th>
+                    <th>Sub Indikator</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -18,13 +19,14 @@
                 @foreach ($data as $i)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $i->area_intervensi->keterangan ?? '' }}</td>
                         <td>{{ $i->keterangan }}</td>
-                        <td class="text-center">{{ $i->mcp_indikator_count }}</td>
+                        <td class="text-center">{{ $i->mcp_sub_indikator_count }}</td>
                         <td class="text-center">
-                            <form action="{{ route('admin.mcp-kpk.area-intervensi.destroy', $i->id) }}" method="POST">
+                            <form action="{{ route('admin.mcp-kpk.indikator.destroy', $i->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a href="{{ route('admin.mcp-kpk.area-intervensi.edit', $i->id) }}"
+                                <a href="{{ route('admin.mcp-kpk.indikator.edit', $i->id) }}"
                                     class="btn btn-primary btn-sm me-2">
                                     Edit
                                 </a>
