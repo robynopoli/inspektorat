@@ -17,7 +17,7 @@ class McpIndikator extends Model
         return $this->belongsTo(AreaIntervensi::class);
     }
 
-    public function mcpSubIndikator() : HasMany
+    public function mcp_sub_indikator() : HasMany
     {
         return $this->hasMany(McpSubIndikator::class);
     }

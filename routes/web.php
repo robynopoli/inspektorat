@@ -56,6 +56,7 @@ Route::middleware(['auth'])->group(function (){
                 ->name('admin.mcp-kpk.index');
             Route::resource('area-intervensi', App\Http\Controllers\Admin\McpKpk\AreaIntervensiController::class, ['as'=>'admin.mcp-kpk']);
             Route::resource('indikator', App\Http\Controllers\Admin\McpKpk\IndikatorController::class, ['as'=>'admin.mcp-kpk']);
+            Route::resource('sub-indikator', App\Http\Controllers\Admin\McpKpk\SubIndikatorController::class, ['as'=>'admin.mcp-kpk']);
         });
 
         /*

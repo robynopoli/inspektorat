@@ -12,7 +12,7 @@ class IndikatorController extends Controller
     public function index()
     {
         return view('admin.mcp-kpk.indikator.index')
-        ->with('data', McpIndikator::withCount('mcpSubIndikator')->with('area_intervensi')->get());
+        ->with('data', McpIndikator::withCount('mcp_sub_indikator')->with('area_intervensi')->get());
     }
 
     public function create()

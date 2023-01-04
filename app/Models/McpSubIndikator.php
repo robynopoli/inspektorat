@@ -11,8 +11,18 @@ class McpSubIndikator extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function mcpDocument() : HasMany
+    public function mcp_indikator()
     {
-        return $this->hasMany(McpSubIndikator::class);
+        return $this->belongsTo(McpIndikator::class);
+    }
+
+    public function obrik()
+    {
+        return $this->belongsTo(Obrik::class);
+    }
+
+    public function mcp_document() : HasMany
+    {
+        return $this->hasMany(McpDocument::class);
     }
 }

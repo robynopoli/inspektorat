@@ -12,6 +12,9 @@
                     <a href="{{ route('admin.mcp-kpk.indikator.index') }}" class="list-group-item mb-2">
                         Indikator
                     </a>
+                    <a href="{{ route('admin.mcp-kpk.sub-indikator.index') }}" class="list-group-item mb-2">
+                        Sub Indikator
+                    </a>
                 </ul>
             </div>
             <div class="col-md-9">
