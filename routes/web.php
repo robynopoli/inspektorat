@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\McpKpk\AreaIntervensiController;
+use App\Http\Controllers\Admin\McpKpk\IndikatorController;
+use App\Http\Controllers\Admin\McpKpk\DocumentSubIndikatorController;
+use App\Http\Controllers\Admin\McpKpk\SubIndikatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,23 +24,23 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login_actio
 Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
-    if (Auth::guest()){
+    if (Auth::guest()) {
         return view('home.pegawai');
-    }else{
+    } else {
         return redirect()->route('home');
     }
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->group(function () {
 
         /*
          * IMTAK PENGAWASAN
          */
-        Route::prefix('imtak-pengawasan')->group(function (){
+        Route::prefix('imtak-pengawasan')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'index'])
                 ->name('admin.imtak-pengawasan.index');
             Route::get('/request', [App\Http\Controllers\Admin\ImtakPengawasanController::class, 'request'])
@@ -51,18 +55,24 @@ Route::middleware(['auth'])->group(function (){
                 ->name('admin.imtak-pengawasan.destroy');
         });
 
-        Route::prefix('mcp-kpk')->group(function (){
+        Route::prefix('mcp-kpk')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\McpController::class, 'index'])
                 ->name('admin.mcp-kpk.index');
-            Route::resource('area-intervensi', App\Http\Controllers\Admin\McpKpk\AreaIntervensiController::class, ['as'=>'admin.mcp-kpk']);
-            Route::resource('indikator', App\Http\Controllers\Admin\McpKpk\IndikatorController::class, ['as'=>'admin.mcp-kpk']);
-            Route::resource('sub-indikator', App\Http\Controllers\Admin\McpKpk\SubIndikatorController::class, ['as'=>'admin.mcp-kpk']);
+            Route::resource('area-intervensi', AreaIntervensiController::class, ['as' => 'admin.mcp-kpk']);
+            Route::resource('indikator', IndikatorController::class, ['as' => 'admin.mcp-kpk']);
+            Route::get('sub-indikator/{sub_indikator}/show-doc', [DocumentSubIndikatorController::class, 'showSubIndikator'])
+                ->name('admin.mcp-kpk.show-document');
+            Route::post('sub-indikator/{sub_indikator}/show-doc', [DocumentSubIndikatorController::class, 'store'])
+                ->name('admin.mcp-kpk.store-document');
+            Route::delete('sub-indikator/{sub_indikator}/destroy/{mcp_document}', [DocumentSubIndikatorController::class, 'destroy'])
+                ->name('admin.mcp-kpk.destroy-document');
+            Route::resource('sub-indikator', SubIndikatorController::class, ['as' => 'admin.mcp-kpk']);
         });
 
         /*
          * PEMANTAUAN TINDAK LANJUT
          */
-        Route::prefix('pemantauan-tindak-lanjut')->group(function (){
+        Route::prefix('pemantauan-tindak-lanjut')->group(function () {
 
             Route::get('/', [App\Http\Controllers\Admin\PemantauanTindakLanjutController::class, 'index'])
                 ->name('admin.pemantauan-tindak-lanjut.index');
@@ -86,22 +96,23 @@ Route::middleware(['auth'])->group(function (){
                 ->name('setting-pegawai.store');
             Route::get('/setting-pegawai/destroy', [App\Http\Controllers\Admin\SettingPegawaiController::class, 'destroy'])
                 ->name('setting-pegawai.destroy');
-
         });
-
     });
 
     Route::prefix('pegawai')->group(function () {
         /*
         * IMTAK PENGAWASAN
         */
-        Route::resource('imtak-pengawasan', \App\Http\Controllers\Pegawai\ImtakPengawasanController::class,
-            ['except' => ['show'], 'as'=>'pegawai']);
+        Route::resource(
+            'imtak-pengawasan',
+            \App\Http\Controllers\Pegawai\ImtakPengawasanController::class,
+            ['except' => ['show'], 'as' => 'pegawai']
+        );
 
         /*
          * PEMANTAUAN TINDAK LANJUT
          */
-        Route::prefix('pemantauan-tindak-lanjut')->group(function (){
+        Route::prefix('pemantauan-tindak-lanjut')->group(function () {
             Route::get('/', [App\Http\Controllers\Pegawai\PemantauanTindakLanjutController::class, 'index'])
                 ->name('pemantauan-tindak-lanjut.index');
 
@@ -113,6 +124,4 @@ Route::middleware(['auth'])->group(function (){
                 ->name('tindak_lanjut_store');
         });
     });
-
 });
-

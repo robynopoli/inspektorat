@@ -34,9 +34,13 @@
                             {{ $i->obrik->bidang_obrik ?? '' }}
                         </td>
                         <td>
-                            @foreach ($i->mcp_document as $doc)
-                                <p class="mb-0">{{ $doc->keterangan }}</p>
-                            @endforeach
+                            <ol type="1">
+                                @foreach ($i->mcp_document as $doc)
+                                    <li>
+                                        <small class="mb-0">{{ $doc->keterangan }}</small>
+                                    </li>
+                                @endforeach
+                            </ol>
                         </td>
 
                         <td class="text-center">
@@ -46,6 +50,10 @@
                                 <a href="{{ route('admin.mcp-kpk.sub-indikator.edit', $i->id) }}"
                                     class="btn btn-primary btn-sm me-2">
                                     Edit
+                                </a>
+                                <a href="{{ route('admin.mcp-kpk.show-document', $i->id) }}"
+                                    class="btn btn-info btn-sm me-2">
+                                    Doc
                                 </a>
                                 <button type="button" class="btn btn-danger btn-sm"
                                     onclick="if (confirm('Anda yakin akan menghapus ini ?')){ this.form.submit();} ">

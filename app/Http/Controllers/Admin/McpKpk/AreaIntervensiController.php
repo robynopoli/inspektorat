@@ -11,7 +11,7 @@ class AreaIntervensiController extends Controller
     public function index()
     {
         return view('admin.mcp-kpk.area-intervensi.index')
-        ->with('data', AreaIntervensi::withCount('mcpIndikator')->get());
+            ->with('data', AreaIntervensi::withCount('mcpIndikator')->get());
     }
 
     public function create()
@@ -31,8 +31,7 @@ class AreaIntervensiController extends Controller
     public function edit(AreaIntervensi $areaIntervensi)
     {
         return view('admin.mcp-kpk.area-intervensi.edit')
-        ->with('data', $areaIntervensi);
-
+            ->with('data', $areaIntervensi);
     }
 
     public function update(AreaIntervensi $areaIntervensi, Request $request)
