@@ -6,13 +6,15 @@
             <div class="col-md-3">
                 <ul class="">
                     <a href="{{ route('admin.mcp-kpk.area-intervensi.index') }}"
-                        class="list-group-item fw-bold text-primary mb-2" aria-current="true">
+                        class="list-group-item {{ request()->is('admin/mcp-kpk/area-intervensi*') ? 'fw-bold text-primary' : '' }} mb-2">
                         Area Intervensi
                     </a>
-                    <a href="{{ route('admin.mcp-kpk.indikator.index') }}" class="list-group-item mb-2">
+                    <a href="{{ route('admin.mcp-kpk.indikator.index') }}"
+                        class="list-group-item {{ request()->is('admin/mcp-kpk/indikator*') ? 'fw-bold text-primary' : '' }} mb-2">
                         Indikator
                     </a>
-                    <a href="{{ route('admin.mcp-kpk.sub-indikator.index') }}" class="list-group-item mb-2">
+                    <a href="{{ route('admin.mcp-kpk.sub-indikator.index') }}"
+                        class="list-group-item {{ request()->is('admin/mcp-kpk/sub-indikator*') ? 'fw-bold text-primary' : '' }} mb-2">
                         Sub Indikator
                     </a>
                 </ul>
