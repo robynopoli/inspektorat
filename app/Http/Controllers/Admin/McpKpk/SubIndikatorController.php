@@ -11,17 +11,24 @@ use Illuminate\Http\Request;
 
 class SubIndikatorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $subIndikator = McpSubIndikator::query()
+            ->with(['mcp_indikator', 'mcp_indikator.area_intervensi', 'obrik']);
+
+        if ($request->get('mcp_indikator_id')) {
+            $subIndikator = $subIndikator->where('mcp_indikator_id', $request->get('mcp_indikator_id'));
+        }
+
         return view('admin.mcp-kpk.sub-indikator.index')
-        ->with('data', McpSubIndikator::with(['mcp_indikator', 'mcp_indikator.area_intervensi', 'obrik'])->get());
+            ->with('data', $subIndikator->get());
     }
 
     public function create()
     {
         return view('admin.mcp-kpk.sub-indikator.create')
-        ->with('obrik', Obrik::get())
-        ->with('mcp_indikator', McpIndikator::with('area_intervensi')->get());
+            ->with('obrik', Obrik::get())
+            ->with('mcp_indikator', McpIndikator::with('area_intervensi')->get());
     }
 
     public function store(Request $request)
@@ -37,9 +44,9 @@ class SubIndikatorController extends Controller
     public function edit(McpSubIndikator $subIndikator)
     {
         return view('admin.mcp-kpk.sub-indikator.edit')
-        ->with('obrik', Obrik::get())
-        ->with('mcp_indikator', McpIndikator::with('area_intervensi')->get())
-        ->with('data', $subIndikator);
+            ->with('obrik', Obrik::get())
+            ->with('mcp_indikator', McpIndikator::with('area_intervensi')->get())
+            ->with('data', $subIndikator);
     }
 
     public function update(McpSubIndikator $subIndikator, Request $request)

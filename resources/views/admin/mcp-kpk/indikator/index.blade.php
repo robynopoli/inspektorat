@@ -21,7 +21,12 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $i->area_intervensi->keterangan ?? '' }}</td>
                         <td>{{ $i->keterangan }}</td>
-                        <td class="text-center">{{ $i->mcp_sub_indikator_count }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('admin.mcp-kpk.sub-indikator.index', ['mcp_sub_indikator_id' => $i->id]) }}"
+                                class="text-decoration-none">
+                                {{ $i->mcp_sub_indikator_count }}
+                            </a>
+                        </td>
                         <td class="text-center">
                             <form action="{{ route('admin.mcp-kpk.indikator.destroy', $i->id) }}" method="POST">
                                 @csrf

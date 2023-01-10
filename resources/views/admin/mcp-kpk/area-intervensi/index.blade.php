@@ -19,7 +19,12 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $i->keterangan }}</td>
-                        <td class="text-center">{{ $i->mcp_indikator_count }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('admin.mcp-kpk.indikator.index', ['area_intervensi_id' => $i->id]) }}"
+                                class="text-decoration-none">
+                                {{ $i->mcp_indikator_count }}
+                            </a>
+                        </td>
                         <td class="text-center">
                             <form action="{{ route('admin.mcp-kpk.area-intervensi.destroy', $i->id) }}" method="POST">
                                 @csrf

@@ -9,16 +9,24 @@ use Illuminate\Http\Request;
 
 class IndikatorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $indikator = McpIndikator::query()
+            ->withCount('mcp_sub_indikator')
+            ->with('area_intervensi');
+
+        if ($request->get('area_intervensi_id')) {
+            $indikator = $indikator->where('area_intervensi_id', $request->get('area_intervensi_id'));
+        }
+
         return view('admin.mcp-kpk.indikator.index')
-        ->with('data', McpIndikator::withCount('mcp_sub_indikator')->with('area_intervensi')->get());
+            ->with('data', $indikator->get());
     }
 
     public function create()
     {
         return view('admin.mcp-kpk.indikator.create')
-        ->with('area_intervensi', AreaIntervensi::all());
+            ->with('area_intervensi', AreaIntervensi::all());
     }
 
     public function store(Request $request)
@@ -34,9 +42,8 @@ class IndikatorController extends Controller
     public function edit(McpIndikator $indikator)
     {
         return view('admin.mcp-kpk.indikator.edit')
-        ->with('area_intervensi', AreaIntervensi::all())
-        ->with('data', $indikator);
-
+            ->with('area_intervensi', AreaIntervensi::all())
+            ->with('data', $indikator);
     }
 
     public function update(McpIndikator $indikator, Request $request)
