@@ -12,12 +12,13 @@ class DocumentSubIndikatorController extends Controller
 {
     public function showSubIndikator(McpSubIndikator $subIndikator)
     {
-        $data = $subIndikator
-            ->with(['mcp_indikator', 'mcp_indikator.area_intervensi', 'obrik', 'mcp_document'])
-            ->first();
+        // return $subIndikator->mcp_document;
+        // $data = $subIndikator
+        //     ->with(['mcp_indikator', 'mcp_indikator.area_intervensi', 'obrik', 'mcp_document'])
+        //     ->first();
         // return $data;
         return view('admin.mcp-kpk.sub-indikator.dokumen.index')
-            ->with('sub_indikator', $data);
+            ->with('sub_indikator', $subIndikator);
     }
 
     public function store(McpSubIndikator $subIndikator, Request $request)

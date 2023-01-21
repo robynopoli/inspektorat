@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\McpKpk\AreaIntervensiController;
-use App\Http\Controllers\Admin\McpKpk\IndikatorController;
 use App\Http\Controllers\Admin\McpKpk\DocumentSubIndikatorController;
+use App\Http\Controllers\Admin\McpKpk\IndikatorController;
 use App\Http\Controllers\Admin\McpKpk\SubIndikatorController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\McpKpk\SubIndikatorController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 //Auth::routes();
 
@@ -84,10 +84,9 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/pengajuan_tl/{id}', [App\Http\Controllers\Admin\PemantauanTindakLanjutController::class, 'pengajuan_tindak_lanjut_update'])
                 ->name('pengajuan_tl_update');
 
-
             /*
-            * SETTING PEGAWAI DENGAN OBRIK
-            */
+             * SETTING PEGAWAI DENGAN OBRIK
+             */
             Route::get('/setting-pegawai', [App\Http\Controllers\Admin\SettingPegawaiController::class, 'index'])
                 ->name('setting-pegawai.index');
             Route::get('/setting-pegawai/create', [App\Http\Controllers\Admin\SettingPegawaiController::class, 'create'])
@@ -101,8 +100,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('pegawai')->group(function () {
         /*
-        * IMTAK PENGAWASAN
-        */
+         * IMTAK PENGAWASAN
+         */
         Route::resource(
             'imtak-pengawasan',
             \App\Http\Controllers\Pegawai\ImtakPengawasanController::class,
@@ -122,6 +121,20 @@ Route::middleware(['auth'])->group(function () {
                 ->name('tindak_lanjut_create');
             Route::post('/tindak-lanjut-create', [App\Http\Controllers\Pegawai\PemantauanTindakLanjutController::class, 'tindak_lanjut_store'])
                 ->name('tindak_lanjut_store');
+        });
+
+        /*
+         * MCP KPK
+         */
+        Route::prefix('mcp-kpk')->group(function () {
+            Route::get('/', [App\Http\Controllers\Pegawai\McpKpkController::class, 'index'])
+                ->name('pegawai.mcp-kpk.index');
+            Route::get('/upload-bukti', [App\Http\Controllers\Pegawai\McpKpkController::class, 'upload_bukti'])
+                ->name('pegawai.mcp-kpk.upload_bukti');
+            Route::post('/upload-bukti', [App\Http\Controllers\Pegawai\McpKpkController::class, 'store_upload_bukti'])
+                ->name('pegawai.mcp-kpk.store_upload_bukti');
+            Route::get('/delete-bukti', [App\Http\Controllers\Pegawai\McpKpkController::class, 'destroy_upload_bukti'])
+                ->name('pegawai.mcp-kpk.destroy_upload_bukti');
         });
     });
 });

@@ -39,8 +39,8 @@ class SettingPegawaiController extends Controller
     {
         $pegawai = Pegawai::where('nip', $request->nip)->first();
 
+        $responseUser = Http::withoutVerifying()->get(env('APP_SIMUTIARA').'/api/searching-by-nip?nip=' . $request->nip);
         if (!$pegawai){
-            $responseUser = Http::withoutVerifying()->get(env('APP_SIMUTIARA').'/api/searching-by-nip?nip=' . $request->nip);
             $pegawai = Pegawai::create(
                 [
                     'nip' => $request->nip,
@@ -50,7 +50,17 @@ class SettingPegawaiController extends Controller
                     'eselon' => $responseUser['eselon'],
                     'jabatan' => $responseUser['jabatan'],
                     'ket_jabatan' => $responseUser['ket_jabatan'],
+                    'opd' => $responseUser['opd'],
                 ]);
+        }else{
+            $pegawai->nama = $responseUser['nama'];
+            $pegawai->pangkat = $responseUser['pangkat'];
+            $pegawai->golongan = $responseUser['golongan'];
+            $pegawai->eselon = $responseUser['eselon'];
+            $pegawai->jabatan = $responseUser['jabatan'];
+            $pegawai->ket_jabatan = $responseUser['ket_jabatan'];
+            $pegawai->opd = $responseUser['opd'];
+            $pegawai->save();
         }
 
         $obriks = explode("-", $request->obriks);

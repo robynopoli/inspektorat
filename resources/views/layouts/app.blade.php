@@ -173,6 +173,12 @@
                                         Imtaq pengawasan
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="text-capitalize nav-link nav-link-custom {{ request()->is('pegawai/mcp-kpk*') ? 'active' : '' }}"
+                                        href="{{ route('pegawai.mcp-kpk.index') }}">
+                                        MCP-KPK
+                                    </a>
+                                </li>
                             </ul>
                         @endif
                     @endauth

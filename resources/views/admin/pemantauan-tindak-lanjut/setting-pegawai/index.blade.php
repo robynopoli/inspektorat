@@ -19,42 +19,45 @@
 
 
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="table">
+                            <table class="table-bordered table" id="table">
                                 <thead>
-                                <tr>
-                                    <th>PEGAWAI</th>
-                                    <th>JABATAN</th>
-                                    <th>AKSES OBRIK</th>
-                                </tr>
+                                    <tr>
+                                        <th>PEGAWAI</th>
+                                        <th>JABATAN</th>
+                                        <th>AKSES OBRIK</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($data as $i)
-                                    <tr>
-                                        <td>
-                                            <small class="fw-bold text-muted">{{ $i->nip }}</small> <br>
-                                            {{ $i->nama }}
-                                        </td>
-                                        <td class="text-wrap" width="30%">
-                                            {{ $i->jabatan }}
-                                        </td>
-                                        <td>
-                                            <ol class="list-group list-unstyled">
-                                                @foreach($i->obriks as $obrik)
-                                                    <li class="list-group-item d-flex justify-content-between">
-                                                        <div>
-                                                            <small class="fw-bold text-muted">{{ $obrik->kode_bidang_obrik }}</small> - {{ $obrik->bidang_obrik }}
-                                                        </div>
-                                                        <a href="{{ route('setting-pegawai.destroy', ['pegawai_id' => $i->id, 'obrik_id' => $obrik->id]) }}"
-                                                           class="btn btn-danger btn-sm"
-                                                           onclick="return confirm('Anda yakin akan menghapus ini')">
-                                                            <small>Hapus</small>
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ol>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                    @foreach ($data as $i)
+                                        <tr>
+                                            <td>
+                                                <small class="fw-bold text-muted">{{ $i->nip }}</small> <br>
+                                                {{ $i->nama }}
+                                            </td>
+                                            <td class="text-wrap" width="30%">
+                                                {{ $i->jabatan }} <br>
+                                                <small class="fw-bold text-muted">{{ $i->opd }}</small> <br>
+                                            </td>
+                                            <td>
+                                                <ol class="list-group list-unstyled">
+                                                    @foreach ($i->obriks as $obrik)
+                                                        <li class="list-group-item d-flex justify-content-between">
+                                                            <div>
+                                                                <small
+                                                                    class="fw-bold text-muted">{{ $obrik->kode_bidang_obrik }}</small>
+                                                                - {{ $obrik->bidang_obrik }}
+                                                            </div>
+                                                            <a href="{{ route('setting-pegawai.destroy', ['pegawai_id' => $i->id, 'obrik_id' => $obrik->id]) }}"
+                                                                class="btn btn-danger btn-sm"
+                                                                onclick="return confirm('Anda yakin akan menghapus ini')">
+                                                                <small>Hapus</small>
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ol>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -75,7 +78,7 @@
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#table').DataTable();
         });
     </script>
