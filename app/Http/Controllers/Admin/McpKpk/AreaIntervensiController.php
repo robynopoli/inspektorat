@@ -11,7 +11,7 @@ class AreaIntervensiController extends Controller
     public function index()
     {
         return view('admin.mcp-kpk.area-intervensi.index')
-            ->with('data', AreaIntervensi::withCount('mcpIndikator')->get());
+            ->with('data', AreaIntervensi::withCount('mcp_indikator')->get());
     }
 
     public function create()
@@ -22,7 +22,7 @@ class AreaIntervensiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'keterangan' => 'required'
+            'keterangan' => 'required',
         ]);
         AreaIntervensi::create($request->except(['_token']));
         return redirect()->route('admin.mcp-kpk.area-intervensi.index');
@@ -37,7 +37,7 @@ class AreaIntervensiController extends Controller
     public function update(AreaIntervensi $areaIntervensi, Request $request)
     {
         $request->validate([
-            'keterangan' => 'required'
+            'keterangan' => 'required',
         ]);
         $areaIntervensi->update($request->except(['_token', '_method']));
         return redirect()->route('admin.mcp-kpk.area-intervensi.index');
