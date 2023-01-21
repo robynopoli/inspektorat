@@ -72,6 +72,9 @@
                             @php
                                 $count_request_coaching = \App\Models\Event::where('status', \App\Models\Event::CHOICE_STATUS[0])->count();
                             @endphp
+                            @php
+                                $count_mcp_doc = \App\Models\McpTindakLanjut::where('is_approve', 0)->count();
+                            @endphp
                             <!-- SIDEBAR UNTUK USER ADMIN ROOT -->
                             <ul class="navbar-nav mx-auto">
                                 <li class="nav-item dropdown">
@@ -115,6 +118,7 @@
                                         <a class="dropdown-item text-capitalize {{ request()->is('admin/mcp-kpk/tindak-lanjut*') ? 'active' : '' }}"
                                             href="{{ route('admin.mcp-kpk.tindak-lanjut.index') }}">
                                             tindak lanjut
+                                            <span class="badge bg-danger">{{ $count_mcp_doc }}</span>
                                         </a>
                                     </div>
                                 </li>

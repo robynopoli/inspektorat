@@ -39,7 +39,25 @@
                                     @endforeach
                                     @if ($indikator->mcp_sub_indikator->count() > 0)
                                         @foreach ($indikator->mcp_sub_indikator as $sub_indikator)
-                                            <h6>{{ $sub_indikator->keterangan }}</h6>
+                                            @php
+                                                $count_document_approve = \App\Models\McpTindakLanjut::whereIn('mcp_document_id', $sub_indikator->mcp_document->pluck('id'))
+                                                    ->where('is_approve', 1)
+                                                    ->count();
+                                                $count_document = \App\Models\McpTindakLanjut::whereIn('mcp_document_id', $sub_indikator->mcp_document->pluck('id'))->count();
+                                            @endphp
+                                            <h6>
+                                                {{ $sub_indikator->keterangan }}
+                                                @if ($count_document > 0)
+                                                    <div class="text-success d-inline fw-bold">
+                                                        ({{ number_format(($count_document_approve / $count_document) * 100, 2) }}
+                                                        %)
+                                                    </div>
+                                                @else
+                                                    <div class="text-danger d-inline fw-bold">
+                                                        ( Capaian belum terhitung )
+                                                    </div>
+                                                @endif
+                                            </h6>
 
                                             <table class="table-bordered table">
                                                 <thead>
