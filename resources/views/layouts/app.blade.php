@@ -113,7 +113,7 @@
                                             master data
                                         </a>
                                         <a class="dropdown-item text-capitalize {{ request()->is('admin/mcp-kpk/tindak-lanjut*') ? 'active' : '' }}"
-                                            href="{{ route('tindak_lanjut') }}">
+                                            href="{{ route('admin.mcp-kpk.tindak-lanjut.index') }}">
                                             tindak lanjut
                                         </a>
                                     </div>

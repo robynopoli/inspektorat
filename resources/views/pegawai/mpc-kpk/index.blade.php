@@ -58,11 +58,14 @@
                                                                     </div>
                                                                     <div class="me-2">
                                                                         @if ($tindak->is_approve == 0)
-                                                                            <span class="badge bg-warning">Belum
-                                                                                diproses</span>
+                                                                            <span class="badge bg-warning">
+                                                                                Proses
+                                                                            </span>
                                                                         @endif
                                                                         @if ($tindak->is_approve == 1)
-                                                                            <span class="badge bg-success">Diterima</span>
+                                                                            <span class="badge bg-success">
+                                                                                Diterima
+                                                                            </span>
                                                                         @endif
                                                                     </div>
 

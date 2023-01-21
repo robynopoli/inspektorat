@@ -11,7 +11,7 @@ class AreaIntervensi extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function mcpIndikator() : HasMany
+    public function mcp_indikator(): HasMany
     {
         return $this->hasMany(McpIndikator::class);
     }

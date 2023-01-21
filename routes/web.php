@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\McpKpk\AreaIntervensiController;
 use App\Http\Controllers\Admin\McpKpk\DocumentSubIndikatorController;
 use App\Http\Controllers\Admin\McpKpk\IndikatorController;
 use App\Http\Controllers\Admin\McpKpk\SubIndikatorController;
+use App\Http\Controllers\Admin\McpKpk\TindakLanjutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,6 +59,10 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('mcp-kpk')->group(function () {
             Route::get('/', [App\Http\Controllers\Admin\McpController::class, 'index'])
                 ->name('admin.mcp-kpk.index');
+
+            /*
+             * MCP-KPK MASTER DATA
+             */
             Route::resource('area-intervensi', AreaIntervensiController::class, ['as' => 'admin.mcp-kpk']);
             Route::resource('indikator', IndikatorController::class, ['as' => 'admin.mcp-kpk']);
             Route::get('sub-indikator/{sub_indikator}/show-doc', [DocumentSubIndikatorController::class, 'showSubIndikator'])
@@ -67,6 +72,15 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('sub-indikator/{sub_indikator}/destroy/{mcp_document}', [DocumentSubIndikatorController::class, 'destroy'])
                 ->name('admin.mcp-kpk.destroy-document');
             Route::resource('sub-indikator', SubIndikatorController::class, ['as' => 'admin.mcp-kpk']);
+
+            /*
+             * TINDAK LANJUT
+             */
+            Route::get('tindak-lanjut', [TindakLanjutController::class, 'index'])
+                ->name('admin.mcp-kpk.tindak-lanjut.index');
+            Route::get('proses-tindak-lanjut', [TindakLanjutController::class, 'proses_tindak_lanjut'])
+                ->name('admin.mcp-kpk.tindak-lanjut.proses_tindak_lanjut');
+
         });
 
         /*
