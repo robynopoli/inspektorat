@@ -48,7 +48,8 @@
                                                 </a>
                                             @endif
                                         </td>
-                                        <td>{{ $i['Memo_Rekomendasi'] }}</td>
+                                        {!!html_entity_decode($i['Memo_Rekomendasi']) !!}
+                                        {{-- <td>{{$i['Memo_Rekomendasi'] }}</td> --}}
                                         <td>{{ $i['Judul_Laporan'] }}</td>
                                         <td>{{ $i['Unit_Obrik'] }}</td>
                                         <td>{{ $i['Bidang_Obrik'] }}</td>

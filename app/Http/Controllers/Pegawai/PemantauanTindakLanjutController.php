@@ -25,6 +25,25 @@ class PemantauanTindakLanjutController extends Controller
                 }
             }
         }
+        // dd($data);
+        function convert($s) {
+
+            //A regular expression to find the URLs
+            $url_regex = '<https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)>';
+        
+            //The preg_replace() function applies the links by using the captured groups of the URL regex
+            return preg_replace($url_regex, '<a href="$0" target="blank" title="$0">$0</a>', $s);
+        
+        }
+        // dd(convert('Forma Surat Teguran download di : https://tinyurl.com/2oo32may'));
+        // dd(count($data));
+        for ($i=0; $i < count($data) ; $i++) { 
+            // dd(htmlentities(convert($data[$i]['Memo_Rekomendasi'].'https://google.com')));
+            $test=['Memo_Rekomendasi'=>htmlentities(convert('<td>'.$data[$i]['Memo_Rekomendasi'].'</td>'))];
+            // dd($test);
+            $data[$i]=array_replace($data[$i],$test);
+        }
+        // dd($data);
         return view('pegawai.pemantauan-tindak-lanjut.index')
             ->with('data', $data);
     }
